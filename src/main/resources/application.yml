@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /crawl-connector
+    session:
+      timeout: 600
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ume?characterEncoding=utf-8&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
+    username: ${username}
+    password: ${password}
+    timeBetweenEvictionRunsMillis: 60000
+    maxIdle: 1
+    jpa:
+      generate-ddl: true
+      hibernate:
+        ddl-auto: none
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 20
+  jpa:
+    database: MYSQL
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    dialect: org.hibernate.dialect.H2Dialect
+
+    generate-ddl: false
+    show-sql: false
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+openai:
+  model: gpt-3.5-turbo
+  api:
+    url: https://api.openai.com/v1/chat/completions
+    key: ${openaiKey}
+crawl:
+  depth: 1
+  folder: c:/work/data/crawl
+  output: c:/work/data/crawl/output
+
+chrome:
+  driver:
+    folder: ./resource/driver
